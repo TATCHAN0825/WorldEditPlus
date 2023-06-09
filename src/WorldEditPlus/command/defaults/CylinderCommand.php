@@ -16,13 +16,13 @@ declare(strict_types = 1);
 
 namespace WorldEditPlus\command\defaults;
 
+use pocketmine\world\Position;
 use WorldEditPlus\command\WorldEditPlusCommand;
 use WorldEditPlus\processing\defaults\CylinderProcessing;
 use WorldEditPlus\Language;
 use WorldEditPlus\WorldEditPlus;
 
 use pocketmine\command\CommandSender;
-use pocketmine\worldPosition;
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
 use pocketmine\Server;
@@ -50,7 +50,7 @@ class CylinderCommand extends WorldEditPlusCommand {
 			if (! isset($args[7]))
 				return false;
 			if ($this->checkNumber($args[0], $args[1], $args[2], $args[3], $args[4], $args[5])) {
-				$level = ($sender instanceof Player) ? $sender->getLevel() : Server::getInstance()->getDefaultLevel();
+				$level = ($sender instanceof Player) ? $sender->getWorld() : Server::getInstance()->getWorldManager()->getDefaultWorld();
 				$pos1 = new Position($args[0], $args[1], $args[2], $level);
 				$pos2 = new Position($args[3], $args[4], $args[5], $level);
 				$cylinder = new CylinderProcessing($sender, $pos1, $pos2, $args[6], $args[7]);

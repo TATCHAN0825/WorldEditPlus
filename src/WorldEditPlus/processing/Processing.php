@@ -33,20 +33,20 @@ use WorldEditPlus\WorldEditPlus;
 
 abstract class Processing extends Range {
     /** @var array */
-    private static $message = [];
-    public static $scheduler = [];
+    private static array $message = [];
+    public static array $scheduler = [];
     /** @var int */
-    private $id;
+    private int $id;
     /** @var CommandSender */
-    public $sender;
+    public CommandSender $sender;
     /** @var float */
-    public $meter;
+    public float $meter;
     /** @var float */
-    public $gage = 0;
+    public float $gage = 0;
     /** @var int */
-    public $stopper;
+    public int $stopper;
     /** @var int */
-    public $restriction = 0;
+    public int $restriction = 0;
 
     /**
      * @param CommandSender $sender
@@ -175,12 +175,12 @@ abstract class Processing extends Range {
         $id = $this->id;
         $name = $this->sender->getName();
         $size = $this->getSize();
-        Server::getInstance()->broadcastMessage(Language::get('processing.start', $id, $name, $command, $size));
+        #Server::getInstance()->broadcastMessage(Language::get('processing.start', $id, $name, $command, $size));
     }
 
     public function endMessage(string $command): void {
         $id = $this->id;
         $name = $this->sender->getName();
-        Server::getInstance()->broadcastMessage(Language::get('processing.end', $id, $name, $command));
+        #Server::getInstance()->broadcastMessage(Language::get('processing.end', $id, $name, $command));
     }
 }

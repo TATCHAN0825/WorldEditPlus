@@ -1,8 +1,7 @@
 <?php
-
-/** 
+/**
  * Copyright (c) 2018 CreeParker
- * 
+ *
  * <English>
  * This plugin is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
@@ -12,7 +11,7 @@
  * http://opensource.org/licenses/mit-license.php
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace WorldEditPlus;
 
@@ -25,45 +24,33 @@ use WorldEditPlus\command\defaults\Pos1Command;
 use WorldEditPlus\command\defaults\Pos2Command;
 use WorldEditPlus\command\defaults\SphereCommand;
 use WorldEditPlus\command\defaults\WandCommand;
-
 use pocketmine\plugin\PluginBase;
 
 class WorldEditPlus extends PluginBase {
+    public static $pos1;
+    public static $pos2;
+    public static WorldEditPlus $instance;
 
-	public static $pos1;
-
-	public static $pos2;
-
-
-	/** @var WorldEditPlus */
-	public static $instance;
-
-	public function onEnable() : void {
-
-		self::$instance = $this;
-
-		$resources = $this->getResources();
-		foreach ($resources as $key => $value)
-			$this->saveResource($key);
-		$lang = $this->getConfig()->get('language');
-		$path = $this->getDataFolder();
-		$fall_path = $this->getFile();
-		new Language($lang, $path, $fall_path);
-
-		$this->getServer()->getPluginManager()->registerEvents((new EventListener), $this);
-
-		$this->getServer()->getCommandMap()->registerAll('worldeditplus', [
-			new BookCommand($this),
-			new CancelCommand($this),
-			new CloneCommand($this),
-			new CylinderCommand($this),
-			new FillCommand($this),
-			new Pos1Command($this),
-			new Pos2Command($this),
-			#new SphereCommand($this),
-			new WandCommand($this),
-		]);
-		
-	}
-
+    public function onEnable(): void {
+        self::$instance = $this;
+        $resources = $this->getResources();
+        foreach ($resources as $key => $value)
+            $this->saveResource($key);
+        $lang = $this->getConfig()->get('language');
+        $path = $this->getDataFolder();
+        $fall_path = $this->getFile();
+        new Language($lang, $path, $fall_path);
+        $this->getServer()->getPluginManager()->registerEvents((new EventListener), $this);
+        $this->getServer()->getCommandMap()->registerAll('worldeditplus', [
+            new BookCommand($this),
+            new CancelCommand($this),
+            new CloneCommand($this),
+            new CylinderCommand($this),
+            new FillCommand($this),
+            new Pos1Command($this),
+            new Pos2Command($this),
+            #new SphereCommand($this),
+            new WandCommand($this),
+        ]);
+    }
 }

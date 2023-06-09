@@ -50,7 +50,7 @@ class SphereCommand extends WorldEditPlusCommand {
 			if (! isset($args[6]))
 				return false;
 			if ($this->checkNumber($args[0], $args[1], $args[2], $args[3], $args[4], $args[5])) {
-				$level = ($sender instanceof Player) ? $sender->getLevel() : Server::getInstance()->getDefaultLevel();
+				$level = ($sender instanceof Player) ? $sender->getWorld() : Server::getInstance()->getWorldManager()->getDefaultWorld();
 				$pos1 = new Position($args[0], $args[1], $args[2], $level);
 				$pos2 = new Position($args[3], $args[4], $args[5], $level);
 				$sphere = new SphereProcessing($sender, $pos1, $pos2, $args[6]);

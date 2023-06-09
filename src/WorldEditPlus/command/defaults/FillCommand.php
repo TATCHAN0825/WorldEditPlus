@@ -46,6 +46,7 @@ class FillCommand extends WorldEditPlusCommand {
 	 * @return bool
 	 */
 	public function onCommand(CommandSender $sender, array $args) : bool {
+        var_dump($args);
 		if (isset($args[0])) {
 			if (! isset($args[6]))
 				return false;

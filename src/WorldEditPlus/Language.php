@@ -20,11 +20,9 @@ class Language {
 
 	private const FALLBACK_LANGUAGE = 'jpn';
 
-	/** @var array */
-	private static $language = [];
+	private static array $language = [];
 
-	/** @var array */
-	private static $fall_language = [];
+	private static array $fall_language = [];
 
 	/**
 	 * @param string $lang

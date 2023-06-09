@@ -18,6 +18,7 @@ namespace WorldEditPlus\processing;
 
 use pocketmine\block\Block;
 use pocketmine\world\world;
+use SQLite3;
 
 class BackUpClass {
 
@@ -26,14 +27,15 @@ class BackUpClass {
 
 	/** @var array */
 	public $data = [];
+    private SQLite3 $db;
 
-	/**
+    /**
 	 * @param World $level
 	 */
 	public function __construct(World $level, $owner) {
 		$folder = $owner->getDataFolder();
 		if(!file_exists($folder)) mkdir($folder);
-		$this->db = new \SQLite3($folder.'backup.sqlite3');
+		$this->db = new SQLite3($folder.'backup.sqlite3');
 		$this->level = $level->getFolderName();
 	}
 
@@ -42,8 +44,7 @@ class BackUpClass {
 	 */
 	public function addData(Block $block) : void {
 		$this->data[] = [
-			'id'      => $block->getId(),
-			'meta' => $block->getDamage(),
+			'name'      => $block->getName(),
 			'x'       => $block->getPosition()->x,
 			'y'       => $block->getPosition()->y,
 			'z'       => $block->getPosition()->z

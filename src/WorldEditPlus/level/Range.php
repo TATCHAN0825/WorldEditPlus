@@ -22,38 +22,38 @@ use pocketmine\world\Position;
 class Range {
 
 	/** @var int */
-	protected $pos1_x;
-	protected $pos1_y;
-	protected $pos1_z;
+	protected int $pos1_x;
+	protected int $pos1_y;
+	protected int $pos1_z;
 
 	/** @var int */
-	protected $pos2_x;
-	protected $pos2_y;
-	protected $pos2_z;
+	protected int $pos2_x;
+	protected int $pos2_y;
+	protected int $pos2_z;
 
-	/** @var Level */
-	protected $pos1_level;
-	protected $pos2_level;
-
-	/** @var int */
-	protected $min_x;
-	protected $min_y;
-	protected $min_z;
+	/** @var World */
+	protected World $pos1_level;
+	protected World $pos2_level;
 
 	/** @var int */
-	protected $max_x;
-	protected $max_y;
-	protected $max_z;
+	protected int $min_x;
+	protected int $min_y;
+	protected int $min_z;
 
 	/** @var int */
-	protected $side_x;
-	protected $side_y;
-	protected $side_z;
+	protected int $max_x;
+	protected int $max_y;
+	protected int $max_z;
+
+	/** @var int */
+	protected int $side_x;
+	protected int $side_y;
+	protected int $side_z;
 	
 	/** @var int */
-	protected $next_x;
-	protected $next_y;
-	protected $next_z;
+	protected int $next_x;
+	protected int $next_y;
+	protected int $next_z;
 
 	/**
 	 * @param Position $pos1

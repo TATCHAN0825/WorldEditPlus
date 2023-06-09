@@ -62,9 +62,9 @@ class CloneProcessing extends Processing {
 		$pos3_y = parent::changeInteger($this->pos3->y);
 		$pos3_z = parent::changeInteger($this->pos3->z);
 
-		$new_level = $this->pos3->getLevel();
+		$new_level = $this->pos3->getWorld();
 
-		$this->normal = $this->level == $new_level;
+		$this->normal = $this->level === $new_level;
 
 		$mask = $this->mask;
 		$clone = $this->clone;

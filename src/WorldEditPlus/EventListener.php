@@ -16,6 +16,7 @@ declare(strict_types = 1);
 
 namespace WorldEditPlus;
 
+use pocketmine\item\ItemTypeIds;
 use pocketmine\Server;
 use WorldEditPlus\WorldEditPlus as WEP;
 use WorldEditPlus\level\Range;
@@ -23,14 +24,13 @@ use WorldEditPlus\level\Range;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\Listener;
-use pocketmine\item\ItemIds;
 use pocketmine\world\Position;
 use pocketmine\utils\TextFormat;
 use pocketmine\player\Player;
 
 class EventListener implements Listener {
 
-	public $time = [];
+	public array $time = [];
 
 	/**
 	 * @param BlockBreakEvent $event
@@ -43,14 +43,14 @@ class EventListener implements Listener {
 	 * @param BlockBreakEvent|PlayerInteractEvent $event
 	 * @param bool $boolean
 	 */
-	public function WandEvent($event, bool $boolean) : void {
+	public function WandEvent(PlayerInteractEvent|BlockBreakEvent $event, bool $boolean) : void {
 		$player = $event->getPlayer();
 		if (! Server::getInstance()->isOp($player->getName()))
 			return;
 		$item = $event->getItem();
-		$id = $item->getId();
+		$id = $item->getTypeId();
 		$name = $item->getName();
-		if ($id === ItemIds::WOODEN_AXE and $name === Language::get('wand.name')) {
+		if ($id === ItemTypeIds::WOODEN_AXE and $name === Language::get('wand.name')) {
 			$event->cancel();
 			$position = $event->getBlock()->getPosition();
 			self::setWandPosition($player, $position, $boolean);
@@ -92,18 +92,16 @@ class EventListener implements Listener {
 			return;
 		$this->WandEvent($event, false);
 		$item = $event->getItem();
-		$id = $item->getId();
+		$id = $item->getTypeId();
 		$name = $item->getName();
-		if ($id !== ItemIds::BOOK and $name !== Language::get('book.name'))
+		if ($id !== ItemTypeIds::BOOK and $name !== Language::get('book.name'))
 			return;
 		$block = $event->getBlock();
 		$name = $block->getName();
-		$id = $block->getId();
-		$meta = $block->getDamage();
 		$x = TextFormat::RED . $block->getPosition()->x . TextFormat::RESET;
 		$y = TextFormat::GREEN . $block->getPosition()->y . TextFormat::RESET;
 		$z = TextFormat::AQUA . $block->getPosition()->z . TextFormat::RESET;
-		$player->sendMessage(Language::get('book.block', $name, $id, $meta, $x, $y, $z));
+		$player->sendMessage(Language::get('book.block', $name, $x, $y, $z));
 	}
 
 	/**

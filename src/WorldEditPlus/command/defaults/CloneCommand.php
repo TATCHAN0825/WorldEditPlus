@@ -69,9 +69,9 @@ class CloneCommand extends WorldEditPlusCommand {
 					return;
 				if ($this->checkNumber($data[0], $data[1], $data[2], $data[3], $data[4], $data[5], $data[6], $data[7], $data[8])) {
 					$name = strtolower($player->getName());
-					$level_pos1 = (WorldEditPlus::$pos1[$name] ?? $player)->getLevel();
-					$level_pos2 = (WorldEditPlus::$pos2[$name] ?? $player)->getLevel();
-					$level_pos3 = $player->getLevel();
+					$level_pos1 = (WorldEditPlus::$pos1[$name] ?? $player)->getWorld();
+					$level_pos2 = (WorldEditPlus::$pos2[$name] ?? $player)->getWorld();
+					$level_pos3 = $player->getWorld();
 					$pos1 = new Position($data[0], $data[1], $data[2], $level_pos1);
 					$pos2 = new Position($data[3], $data[4], $data[5], $level_pos2);
 					$pos3 = new Position($data[6], $data[7], $data[8], $level_pos3);
